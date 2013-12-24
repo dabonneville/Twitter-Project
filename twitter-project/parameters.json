@@ -1,0 +1,21 @@
+{
+    "email": {
+        "username": "user@email.com",
+        "password": "password",
+        "recipients": ["user@email.com"]
+    },
+    "mysql": {
+        "host": "host",
+        "user": "user",
+        "passwd": "password!",
+        "db": "database"
+    },
+    "twitter": {
+        "consumer_key": "",
+        "consumer_secret": "",
+        "access_token": "",
+        "access_token_secret": "",
+        "follow": [],
+        "track": []
+    }
+}
