@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>QAC Projects</title>
+    <meta name="description" content="An online portfolio of projects by students affiliated with the Wesleyan University Quantitative Analysis Center.">
+    <meta name="author" content="Wesleyan University Quantitative Analysis Center">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="nv.d3.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <h2 class="text-error">QAC Projects</h2>
+      </div>
+
+      <h2>Twitter Project</h2>
+      <p class="muted">Mansoor Alam and Ross Petchler / Updated Jan 2014</p>
+
+
+      <div>
+        <ul class="nav nav-tabs">
+          <li><a href="#info" data-toggle="tab">Info</a></li>
+          <li class="active"><a href="#overall" data-toggle="tab">Overall</a></li>
+          <li><a href="#party" data-toggle="tab">Party</a></li>
+          <li><a href="#issue-immigration" data-toggle="tab">Issue: Immigration</a></li>
+          <li><a href="#issue-healthcare" data-toggle="tab">Issue: Healthcare</a></li>
+          <li><a href="#issue-syria" data-toggle="tab">Issue: Syria</a></li>
+        </ul>
+        <div class="tab-content">
+
+          <div class="tab-pane fade" id="info">
+            <h3>Colophon</h3>
+            <p>These Tweets are collected from the Twitter Streaming API using <a href="https://github.com/tweepy/tweepy">tweepy</a>, stored in MySQL, manipulated using <a href="http://pandas.pydata.org/">pandas</a>, and visualized using <a href="http://d3js.org/">D3</a> and <a href="http://nvd3.org/">NVD3</a>.</p>
+          </div>
+
+          <div class="tab-pane fade in active" id="overall">
+            <h3>Volume of Tweets</h3>
+              <p>This line chart shows how the volume of Tweets sent by members of Congress changes over time. Use the grey buttons to change the aggregation period and the small chart to change the date range. Scroll over the line in the large chart for frequency data.</p>
+              <p>All timestamps are in Eastern Daylight Time.</p>
+              <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-overall-volume active">Day</button>
+                <button type="button" class="btn btn-overall-volume">Hour</button>
+              </div>
+              <div id="overall-volume" class="nv-chart">
+                <svg></svg>
+              </div>
+            <h3>Tweet Sentiment by Party</h3>
+              <p>This line chart shows the change in Tweet sentiment over time by party. A lexicon is used to assign positive and negative values to the Tweet text. Sentiment is calculated as the positive value minus the absolute value of negative value.</p>
+              <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-sentiment-volume active">Day</button>
+                <button type="button" class="btn btn-sentiment-volume">Hour</button>
+              </div>
+               <div id="sentiment-volume" class="nv-chart">
+                <svg></svg>
+              </div>
+            <h3>Popular Hashtags - Stacked Area </h3>
+                <div id="stack-area" class="nv-chart">
+                  <svg></svg>
+              </div>
+            <h3>Volume of Tweets by Congressional District</h3>
+              <p>This map shows the volume of Tweets sent by members of the House of Representatives by each Congressional district.</p>
+              <p><span id="representative"></span> <span id="district"> </span><br><span id="url"></span></p>
+              <div id="overall-choropleth">
+              </div>
+            <h3>Most Frequent Tweet Sources</h3>
+              <div id="overall-source" class="nv-chart">
+                <svg></svg>
+              </div>
+            <h3>Most Frequent Hashtags - Past 24 Hours</h3>
+              <div id="overall-hashtag" class="nv-chart">
+                <svg></svg>
+              </div>
+            <h3>Domains Most Frequently Linked To</h3>
+              <div id="overall-domain" class="nv-chart">
+                <svg></svg>
+              </div>
+          </div>
+
+          <div class="tab-pane fade" id="party">
+            <div class="clearfix">
+              <h3>Volume of Tweets: Congress</h3>
+              <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-party-volume active">Hour</button>
+                <button type="button" class="btn btn-party-volume">Day</button>
+              </div>
+              <div id="party-volume" class="nv-chart">
+                <svg></svg>
+              </div>
+              <h3>Volume of Tweets: Senate</h3>
+              <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-party-volume-senate active">Hour</button>
+                <button type="button" class="btn btn-party-volume-senate">Day</button>
+              </div>
+              <div id="party-volume-senate" class="nv-chart">
+                <svg></svg>
+              </div>
+            </div>
+            <div class="clearfix">
+              <h3>Most Frequent Hashtags</h3>
+              <div class="span4 pull-left">
+                <h4>Democratic Congress Members</h4>
+                  <div id="democrat-hashtag">
+                  </div>
+              </div>
+              <div class="span4 pull-left">
+                <h4>Republican Congress Members</h4>
+                  <div id="republican-hashtag">
+                  </div>
+              </div>
+            </div>
+            <div class="clearfix">
+              <h3>Domains Most Frequently Linked To</h3>
+              <div class="span4 pull-left">
+                <h4>Democratic Congress Members</h4>
+                  <div id="democrat-domain">
+                  </div>
+              </div>
+              <div class="span4 pull-left">
+                <h4>Republican Congress Members</h4>
+                  <div id="republican-domain">
+                  </div>
+              </div>
+            </div>
+            <div class="clearfix">
+              <h3>Twitter Streams</h3>
+                <div class="span4 pull-left">
+                  <h4>Democratic Congress Members</h4>
+                    <div id="tw">
+                      <a class="twitter-timeline" width= "300" height="400" data-dnt="true" href="https://twitter.com/qactweet/housetweetdem" data-widget-id="367774567441252352" data-chrome="noheader">Tweets from @qactweet/housetweetdem</a>
+                      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+                </div>
+                <div class="span4 pull-left">
+                  <h4>Republican Congress Members</h4>
+                    <div id="tw">
+                      <a class="twitter-timeline" width= "300" height="400" data-dnt="true" href="https://twitter.com/qactweet/housetweetrep" data-widget-id="367773901117345792" data-chrome="noheader">Tweets from @qactweet/housetweetrep</a>
+                      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+                  </div>
+                <div class="span3.5 pull-right">
+                  <h4>What Others Are Saying On...</h4>
+                    <h2>Healthcare</h2>
+                    <div id="tw">
+                      <a class="twitter-timeline" width= "280" height="400" data-dnt="true" href="https://twitter.com/search?q=%23healthcare+OR+%23obamacare+OR+%23immigration" data-widget-id="367809255992074240" data-chrome="noheader">Tweets about "#healthcare OR #obamacare OR #immigration"</a>
+                      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="issue-immigration">
+            <h3>Issue: Immigration</h3>
+                <p>These charts track Tweets containing the words <em>illegals</em>, <em>immig*</em>, <em>amnesty</em>, or <em>border</em> sent by members of the House of Representatives by each Congressional district.</p>
+              <h3>Volume of Tweets</h3>
+                <div class="btn-group" data-toggle="buttons-radio">
+                  <button type="button" class="btn btn-immigration-volume active">Hour</button>
+                  <button type="button" class="btn btn-immigration-volume">Day</button>
+                </div>
+                <div id="immigration-volume" class="nv-chart">
+                  <svg></svg>
+                </div>
+              <h3>Volume of Tweets by Congressional District</h3>
+                <div id="immigration-choropleth">
+                </div>
+          </div>
+
+          <div class="tab-pane fade" id="issue-healthcare">
+            <h3>Issue: Healthcare</h3>
+                <p>These charts track Tweets containing the words <em>health*</em>, <em>Obamacare</em>, <em>Affordable Care Act</em>, or <em>ACA</em> sent by members of the House of Representatives by each Congressional district.</p>
+              <h3>Volume of Tweets</h3>
+                <div class="btn-group" data-toggle="buttons-radio">
+                  <button type="button" class="btn btn-healthcare-volume active">Hour</button>
+                  <button type="button" class="btn btn-healthcare-volume">Day</button>
+                </div>
+                <div id="healthcare-volume" class="nv-chart">
+                  <svg></svg>
+                </div>
+              <h3>Volume of Tweets by Congressional District</h3>
+                <div id="healthcare-choropleth">
+                </div>
+          </div>
+
+          <div class="tab-pane fade" id="issue-syria">
+            <h3>Issue: Syria</h3>
+                <p>These charts track Tweets mentioning <em>Syria</em>, sent by members of the House of Representatives by each Congressional district.</p>
+              <h3>Volume of Tweets</h3>
+                <div class="btn-group" data-toggle="buttons-radio">
+                  <button type="button" class="btn btn-syria-volume active">Hour</button>
+                  <button type="button" class="btn btn-syria-volume">Day</button>
+                </div>
+                <div id="syria-volume" class="nv-chart">
+                  <svg></svg>
+                </div>
+              <h3>Volume of Tweets by Congressional District</h3>
+                <div id="syria-choropleth">
+                </div>
+          </div>
+
+        </div>
+      </div>
+
+      <hr>
+      <div class="footer">
+        <p>&copy; 2014 Wesleyan University</p>
+      </div>
+    </div> <!-- /container -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="d3.min.js"></script>
+    <script src="nv.d3.min.js"></script>
+    <script src="topojson.js"></script>
+    <script src="qac.js"></script>
+    <script src="twitter-project.js"></script>
+
+  </body>
+</html>
